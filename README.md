@@ -45,11 +45,11 @@ To install `dslib`, run:
 
     $ sudo make install
 
-To unnstall `dslib` from your system, run:
+To remove `dslib` from your system, run:
 
     $ sudo make uninstall
 
-Clean up (cleans test executables too)
+Clean up (cleans test executables too):
 
     $ make clean
 
