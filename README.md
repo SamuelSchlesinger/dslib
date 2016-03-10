@@ -1,7 +1,8 @@
 # dslib
 The goal of `dslib` is to demonstrate how complex data structures (and related algorithms) can be developed by reusing simpler ones. In general, textbooks come with numerous unrelated examples each relevant to a specific DS. `dslib`, on the other hand, grows by consuming the earlier data structures.
 
-`dslib` is an academic library. However, we'll be glad if someone finds any other application of it.
+`dslib` is an academic library. However, we'll be glad if someone finds any other application of it. If you find `dslib` useful, please consider donating via PayPal.
+[![Donate Button](https://img.shields.io/badge/paypal-donate-orange.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RMLTQ76JSXJ4Q)
 
 The core component is a circular doubly linked list. Library-internal data structures are dynamically (de)allocated.
 
