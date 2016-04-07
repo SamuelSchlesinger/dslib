@@ -8,6 +8,8 @@ The core component is a circular doubly linked list. Library-internal data struc
 
 `dslib` is **GPLv3** licensed. Copyright (C) 2015 [Arun Prakash Jana](mailto:engineerarun@gmail.com).
 
+Most of the code conforms to the Linux kernel coding standards (verified against *checkpatch.pl*), other than a few unavoidable instances.
+
 # Table of Contents
 - [Building blocks](#building-blocks)
 - [APIs](#apis)
