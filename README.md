@@ -30,7 +30,7 @@ Most of the code conforms to the Linux kernel coding standards (verified against
 There are test cases for each DS. Though not very organized, they provide an insight into the usage of `dslib`.
 
 # APIs
-A complete list of APIs can be found in *apilist.txt*. Most of the APIs are iterative.
+A complete list of APIs can be found in [apilist.txt](https://github.com/jarun/dslib/blob/master/apilist.txt). Most of the APIs are iterative.
 The following 2 APIs are recursive and the iterative implementations are left as an exercise:
 - bool delete_tree_node(tree_pp head, int val);
 - bool delete_avl_node(avl_pp head, int val);
