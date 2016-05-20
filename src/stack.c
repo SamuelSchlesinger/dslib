@@ -43,9 +43,9 @@ bool push(stack_p stack, void *val)
 	nodeptr->data = val;
 
 	if (add_head_dlist(stack->head, nodeptr)) /* Last In */
-		return TRUE;
+		return true;
 	else
-		return FALSE;
+		return false;
 }
 
 /*
@@ -68,9 +68,9 @@ void *pop(stack_p stack)
 bool isStackEmpty(stack_p stack)
 {
 	if (get_head_dlist(stack->head))
-		return TRUE;
+		return true;
 
-	return FALSE;
+	return false;
 }
 
 /*
@@ -80,10 +80,10 @@ bool isStackEmpty(stack_p stack)
 bool destroy_stack(stack_p stack)
 {
 	if (destroy_dlist(stack->head) == -1)
-		return FALSE;
+		return false;
 
 	free(stack->head);
 	free(stack);
 
-	return TRUE;
+	return true;
 }

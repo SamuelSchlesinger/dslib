@@ -43,9 +43,9 @@ bool enqueue(queue_p queue, void *val)
 	nodeptr->data = val;
 
 	if (add_head_dlist(queue->head, nodeptr)) /* Last In */
-		return TRUE;
+		return true;
 	else
-		return FALSE;
+		return false;
 }
 
 /*
@@ -68,9 +68,9 @@ void *dequeue(queue_p queue)
 bool isQueueEmpty(queue_p queue)
 {
 	if (get_head_dlist(queue->head))
-		return TRUE;
+		return true;
 
-	return FALSE;
+	return false;
 }
 
 /*
@@ -80,10 +80,10 @@ bool isQueueEmpty(queue_p queue)
 bool destroy_queue(queue_p queue)
 {
 	if (destroy_dlist(queue->head) == -1)
-		return FALSE;
+		return false;
 
 	free(queue->head);
 	free(queue);
 
-	return TRUE;
+	return true;
 }

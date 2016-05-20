@@ -137,7 +137,7 @@ bool rebalance(stack_p stack, avl_pp head, avl_p tmp, int data)
 	nodedata_p p = NULL;
 	int direction;
 	avl_p parent = NULL;
-	bool modified = TRUE;
+	bool modified = true;
 
 	if (BalanceFactor(tmp) == -2) { /* Right subtree longer */
 		p = pop(stack);
@@ -185,7 +185,7 @@ bool rebalance(stack_p stack, avl_pp head, avl_p tmp, int data)
 				*head = LeftRight(tmp);
 		}
 	} else
-		modified = FALSE;
+		modified = false;
 
 	if (p)
 		free(p);
@@ -239,7 +239,7 @@ avl_pp generate_avl(int *arr, int len)
 	head = init_avl();
 
 	for (; i < len; i++) {
-		if (insert_avl_node(head, arr[i]) == FALSE) {
+		if (insert_avl_node(head, arr[i]) == false) {
 			log(ERROR, "Insertion failed.\n");
 			destroy_avl(head);
 			return NULL;
@@ -274,7 +274,7 @@ bool insert_avl_node(avl_pp head, int val)
 
 	if (!head) {
 		log(ERROR, "Initialize AVL tree first\n");
-		return FALSE;
+		return false;
 	}
 
 	root = *head;
@@ -284,7 +284,7 @@ bool insert_avl_node(avl_pp head, int val)
 		root->data = val;
 		*head = root;
 
-		return TRUE;
+		return true;
 	}
 
 	while (root) {
@@ -295,7 +295,7 @@ bool insert_avl_node(avl_pp head, int val)
 				root->left->data = val;
 				root->height = height(root);
 
-				modified = FALSE;
+				modified = false;
 
 				/* Unwind stack & rebalance nodes (only once) */
 				while ((p = pop(stack)) != NULL) {
@@ -326,7 +326,7 @@ bool insert_avl_node(avl_pp head, int val)
 				root->right->data = val;
 				root->height = height(root);
 
-				modified = FALSE;
+				modified = false;
 
 				while ((p = pop(stack)) != NULL) {
 					if (!modified) {
@@ -351,7 +351,7 @@ bool insert_avl_node(avl_pp head, int val)
 
 	destroy_stack(stack);
 
-	return TRUE;
+	return true;
 }
 
 /*
@@ -365,21 +365,21 @@ bool delete_avl_node(avl_pp head, int val)
 
 	if (!head) {
 		log(ERROR, "Initialize AVL tree first\n");
-		return FALSE;
+		return false;
 	}
 
 	node = *head;
 	if (!node) {
 		log(ERROR, "No nodes to delete\n");
-		return FALSE;
+		return false;
 	}
 
 	if (val > node->data) {
 		if (!node->right)
-			return FALSE;
+			return false;
 
-		if (delete_avl_node(&(node->right), val) == FALSE)
-			return FALSE;
+		if (delete_avl_node(&(node->right), val) == false)
+			return false;
 
 		if (BalanceFactor(node) == 2) {
 			if (BalanceFactor(node->left) >= 0)
@@ -389,10 +389,10 @@ bool delete_avl_node(avl_pp head, int val)
 		}
 	} else if (val < node->data) {
 		if (!node->left)
-			return FALSE;
+			return false;
 
-		if (delete_avl_node(&(node->left), val) == FALSE)
-			return FALSE;
+		if (delete_avl_node(&(node->left), val) == false)
+			return false;
 
 		if (BalanceFactor(node) == -2) {
 			if (BalanceFactor(node->right) <= 0)
@@ -407,8 +407,8 @@ bool delete_avl_node(avl_pp head, int val)
 				tmp = tmp->left;
 
 			node->data = tmp->data;
-			if (delete_avl_node(&(node->right), tmp->data) == FALSE)
-				return FALSE;
+			if (delete_avl_node(&(node->right), tmp->data) == false)
+				return false;
 
 			if (BalanceFactor(node) == 2) {
 				if (BalanceFactor(node->left) >= 0)
@@ -418,13 +418,13 @@ bool delete_avl_node(avl_pp head, int val)
 			}
 		} else {
 			*head = node->left;
-			return TRUE;
+			return true;
 		}
 	}
 
 	node->height = height(node);
 	*head = node;
-	return TRUE;
+	return true;
 }
 
 /*
@@ -492,11 +492,11 @@ bool search_BFS_avl(avl_pp root, int val, bool stop)
 {
 	avl_p node = NULL;
 	queue_p queue = NULL;
-	int ret = FALSE;
+	int ret = false;
 
 	if (!root || !*root) {
 		log(ERROR, "avl tree or root node is NULL!\n");
-		return FALSE;
+		return false;
 	}
 
 	/* Check for a match in root node */
@@ -505,7 +505,7 @@ bool search_BFS_avl(avl_pp root, int val, bool stop)
 		log(INFO, "FOUND %d\n", val);
 
 		if (stop)
-			return TRUE;
+			return true;
 	}
 
 	queue = get_queue();
@@ -514,7 +514,7 @@ bool search_BFS_avl(avl_pp root, int val, bool stop)
 	if (!enqueue(queue, *root)) {
 		log(ERROR, "enqueue failed!\n");
 		destroy_queue(queue);
-		return FALSE;
+		return false;
 	}
 
 	/* Loop through all nodes in the Queue */
@@ -525,7 +525,7 @@ bool search_BFS_avl(avl_pp root, int val, bool stop)
 		if (node->left) {
 			if (node->left->data == val) {
 				log(INFO, "FOUND %d\n", val);
-				ret = TRUE;
+				ret = true;
 
 				if (stop)
 					break;
@@ -535,7 +535,7 @@ bool search_BFS_avl(avl_pp root, int val, bool stop)
 			if (!enqueue(queue, node->left)) {
 				log(ERROR, "enqueue failed!\n");
 				destroy_queue(queue);
-				return FALSE;
+				return false;
 			}
 		}
 
@@ -543,7 +543,7 @@ bool search_BFS_avl(avl_pp root, int val, bool stop)
 		if (node->right) {
 			if (node->right->data == val) {
 				log(INFO, "FOUND %d\n", val);
-				ret = TRUE;
+				ret = true;
 
 				if (stop)
 					break;
@@ -553,7 +553,7 @@ bool search_BFS_avl(avl_pp root, int val, bool stop)
 			if (!enqueue(queue, node->right)) {
 				log(ERROR, "enqueue failed!\n");
 				destroy_queue(queue);
-				return FALSE;
+				return false;
 			}
 		}
 	}

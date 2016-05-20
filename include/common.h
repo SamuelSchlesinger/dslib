@@ -19,15 +19,12 @@
  */
 
 #include <stdlib.h>
+#include <stdbool.h>
 #include "log.h"
 
 #pragma once
 
 /* Introduce boolean type */
-#define TRUE 1
-#define FALSE !TRUE
 
 #define LEFT  0
 #define RIGHT 1
-
-typedef unsigned char bool;

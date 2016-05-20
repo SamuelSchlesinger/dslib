@@ -66,7 +66,7 @@ tree_pp generate_tree(int *arr, int len)
 	head = init_tree();
 
 	for (; i < len; i++) {
-		if (insert_tree_node(head, arr[i]) == FALSE) {
+		if (insert_tree_node(head, arr[i]) == false) {
 			log(ERROR, "Insertion failed.\n");
 			destroy_tree(head);
 			return NULL;
@@ -96,7 +96,7 @@ bool insert_tree_node(tree_pp head, int val)
 
 	if (!head) {
 		log(ERROR, "Initialize tree first.\n");
-		return FALSE;
+		return false;
 	}
 
 	root = *head;
@@ -107,7 +107,7 @@ bool insert_tree_node(tree_pp head, int val)
 				root->left = calloc(1, sizeof(tree_t));
 				root = root->left;
 				root->data = val;
-				return TRUE;
+				return true;
 			}
 
 			root = root->left;
@@ -116,7 +116,7 @@ bool insert_tree_node(tree_pp head, int val)
 				root->right = calloc(1, sizeof(tree_t));
 				root = root->right;
 				root->data = val;
-				return TRUE;
+				return true;
 			}
 
 			root = root->right;
@@ -131,10 +131,10 @@ bool insert_tree_node(tree_pp head, int val)
 		root->data = val;
 		*head = root;
 
-		return TRUE;
+		return true;
 	}
 
-	return FALSE;
+	return false;
 }
 
 /*
@@ -148,7 +148,7 @@ bool delete_tree_node(tree_pp head, int val)
 
 	if (!head) {
 		log(ERROR, "Initialize tree first.\n");
-		return FALSE;
+		return false;
 	}
 
 	root = *head;
@@ -179,7 +179,7 @@ bool delete_tree_node(tree_pp head, int val)
 					*head = root->right;
 
 				free(root);
-				return TRUE;
+				return true;
 			} else if (!root->right) {
 				if (prev) {
 					if (direction == LEFT)
@@ -190,7 +190,7 @@ bool delete_tree_node(tree_pp head, int val)
 					*head = root->left;
 
 				free(root);
-				return TRUE;
+				return true;
 			} else { /* Both subtrees have children */
 				/* Delete inorder successor */
 				tree_p min = root->right;
@@ -201,13 +201,13 @@ bool delete_tree_node(tree_pp head, int val)
 				/* Let's use some recursion here */
 				delete_tree_node(&(root->right), min->data);
 
-				return TRUE;
+				return true;
 			}
 		}
 	}
 
 	/* Fall through if root is NULL */
-	return FALSE;
+	return false;
 }
 
 /*
@@ -268,11 +268,11 @@ bool search_BFS(tree_pp root, int val, bool stop)
 {
 	tree_p node = NULL;
 	queue_p queue = NULL;
-	int ret = FALSE;
+	int ret = false;
 
 	if (!root || !*root) {
 		log(ERROR, "tree or root node is NULL!\n");
-		return FALSE;
+		return false;
 	}
 
 	/* Check for a match in root node */
@@ -281,7 +281,7 @@ bool search_BFS(tree_pp root, int val, bool stop)
 		log(INFO, "FOUND %d\n", val);
 
 		if (stop)
-			return TRUE;
+			return true;
 	}
 
 	queue = get_queue();
@@ -290,7 +290,7 @@ bool search_BFS(tree_pp root, int val, bool stop)
 	if (!enqueue(queue, *root)) {
 		log(ERROR, "enqueue failed!\n");
 		destroy_queue(queue);
-		return FALSE;
+		return false;
 	}
 
 	/* Loop through all nodes in the Queue */
@@ -301,7 +301,7 @@ bool search_BFS(tree_pp root, int val, bool stop)
 		if (node->left) {
 			if (node->left->data == val) {
 				log(INFO, "FOUND %d\n", val);
-				ret = TRUE;
+				ret = true;
 
 				if (stop)
 					break;
@@ -311,7 +311,7 @@ bool search_BFS(tree_pp root, int val, bool stop)
 			if (!enqueue(queue, node->left)) {
 				log(ERROR, "enqueue failed!\n");
 				destroy_queue(queue);
-				return FALSE;
+				return false;
 			}
 		}
 
@@ -319,7 +319,7 @@ bool search_BFS(tree_pp root, int val, bool stop)
 		if (node->right) {
 			if (node->right->data == val) {
 				log(INFO, "FOUND %d\n", val);
-				ret = TRUE;
+				ret = true;
 
 				if (stop)
 					break;
@@ -329,7 +329,7 @@ bool search_BFS(tree_pp root, int val, bool stop)
 			if (!enqueue(queue, node->right)) {
 				log(ERROR, "enqueue failed!\n");
 				destroy_queue(queue);
-				return FALSE;
+				return false;
 			}
 		}
 	}
@@ -356,13 +356,13 @@ bool search_BFS(tree_pp root, int val, bool stop)
  */
 bool search_DFS(tree_pp root, int val, bool stop)
 {
-	int ret = FALSE;
+	int ret = false;
 	tree_p node = NULL;
 	stack_p stack = NULL;
 
 	if (!root || !*root) {
 		log(ERROR, "tree or root node is NULL.\n");
-		return FALSE;
+		return false;
 	}
 
 	/* Check for a match in root node */
@@ -371,7 +371,7 @@ bool search_DFS(tree_pp root, int val, bool stop)
 		log(INFO, "FOUND %d\n", val);
 
 		if (stop)
-			return TRUE;
+			return true;
 	}
 
 	stack = get_stack();
@@ -380,7 +380,7 @@ bool search_DFS(tree_pp root, int val, bool stop)
 	if (!push(stack, *root)) {
 		log(ERROR, "push failed!\n");
 		destroy_stack(stack);
-		return FALSE;
+		return false;
 	}
 
 	/* Process all valid nodes */
@@ -392,7 +392,7 @@ bool search_DFS(tree_pp root, int val, bool stop)
 		while (node->left) {
 			if (node->left->data == val) {
 				log(INFO, "FOUND %d\n", val);
-				ret = TRUE;
+				ret = true;
 
 				if (stop) {
 					node = NULL;
@@ -404,7 +404,7 @@ bool search_DFS(tree_pp root, int val, bool stop)
 			if (!push(stack, node->left)) {
 				log(ERROR, "push failed!\n");
 				destroy_stack(stack);
-				return FALSE;
+				return false;
 			}
 
 			node = node->left;
@@ -415,7 +415,7 @@ bool search_DFS(tree_pp root, int val, bool stop)
 			if (node->right) {
 				if (node->right->data == val) {
 					log(INFO, "FOUND %d\n", val);
-					ret = TRUE;
+					ret = true;
 
 					if (stop) {
 						node = NULL;
@@ -427,7 +427,7 @@ bool search_DFS(tree_pp root, int val, bool stop)
 				if (!push(stack, node->right)) {
 					log(ERROR, "push failed!\n");
 					destroy_stack(stack);
-					return FALSE;
+					return false;
 				}
 
 				node = node->right;
