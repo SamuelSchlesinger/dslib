@@ -27,8 +27,8 @@ void* lookup_tst(tst_pp head, char* key) {
     else return cur->obj;  // :)
 }
 
-int insert_tst(tst_pp head, char* key, void* obj) {
+/*int insert_tst(tst_pp head, char* key, void* obj) {
     if (head == NULL) return -1;
     else if (key == NULL) return -1;
     tst_p cur = *head;
-}
+}*/
